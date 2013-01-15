@@ -1,5 +1,5 @@
 // http-pasta.js
-var p = require('pasta')()
+var p = require('gen-pasta')()
 
 function httpPasta (opts) {
   // HTTP Functions
