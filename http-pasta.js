@@ -12,7 +12,7 @@ function httpPasta (opts) {
         res.statusCode = (code || 500)
         res.end('Server ' + error)
       } else {
-        p.log("Allready fired " + error)
+        p.log("Already fired " + error)
       }
     }
   }
