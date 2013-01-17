@@ -47,9 +47,9 @@ function httpPasta (opts) {
   function dispatch (methods) {
     return function (req, res) {
       var intended = methods[req.method]
-      if (typeof intended === 'function') return intended.apply(null, arguments)
+      if (typeof intended === 'function') return intended.apply(this, arguments)
       var _default = methods[_default]
-      if (typeof _default === 'function') return _default.apply(null, arguments)
+      if (typeof _default === 'function') return _default.apply(this, arguments)
       return refuse(req, res, Object.keys(methods))
     }
   }
