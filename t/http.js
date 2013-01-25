@@ -1,8 +1,9 @@
 var test = require('tape')
-  , p = require('../http-pasta')()
+  , hp = require('../http-pasta')
+  , p = hp()
 
 test('HTTP tests', function (t) {
-  t.plan(10)
+  t.plan(11)
 
   var ehres =
     { end: function (str) {
@@ -48,5 +49,9 @@ test('HTTP tests', function (t) {
     }
 
   p.redirect('asdf')({}, redirectres)
+  p2 = hp({ log: function (a) {
+    t.equal(a, 'You called a route that is not yet implemented.', 'opt.log')
+  }})
+  p2.notyet(null, { end: function () {} })
 
 })

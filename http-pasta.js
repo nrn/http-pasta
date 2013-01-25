@@ -3,22 +3,29 @@ var p = require('gen-pasta')()
 
 function httpPasta (opts) {
   // HTTP Functions
+  if (!opts) opts = {}
+  var log = p.log
+  if (typeof opts.log === 'function') log = opts.log
 
   function errorHandler (res) {
     var fired = false
     return function (error, code) {
       if (!fired) {
+        code = code || 500
+        error = error || 'Unspecified error'
+        var stack = error.stack || error
         fired = true
         res.statusCode = (code || 500)
         res.end('Server ' + error)
+        log(code + ': ' + stack)
       } else {
-        p.log("Allready fired " + error)
+        log("Allready fired " + error)
       }
     }
   }
 
   function notyet (req, res) {
-    p.log('You called a route that is not yet implemented')
+    log('You called a route that is not yet implemented.')
     res.statusCode = 404
     res.end('not found')
   }
