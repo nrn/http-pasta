@@ -19,7 +19,7 @@ function httpPasta (opts) {
         res.end('Server ' + error)
         log(code + ': ' + stack)
       } else {
-        log("Allready fired " + error)
+        log("Already fired " + error)
       }
     }
   }
