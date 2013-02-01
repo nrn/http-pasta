@@ -39,10 +39,11 @@ function httpPasta (opts) {
     }
   }
 
-  function jsonCORS (req, res) {
-    res.statusCode = 200
-    res.setHeader('Content-Type', 'application/json')
+  function cors (res) {
     res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,HEAD,OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept')
+
   }
 
   function refuse (req, res, allowed) {
@@ -64,7 +65,7 @@ function httpPasta (opts) {
   return { errorHandler: errorHandler
     , eh: errorHandler
     , notyet: notyet
-    , jsonCORS: jsonCORS
+    , cors: cors
     , redirect: redirect
     , dispatch: dispatch
     , refuse: refuse
