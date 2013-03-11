@@ -11,6 +11,10 @@ function httpPasta (opts) {
     var fired = false
     return function (error, code) {
       if (!fired) {
+        if (typeof error === 'number') {
+          code = error
+          error = 'Error: ' + code
+        }
         code = code || 500
         error = error || 'Unspecified error'
         var stack = error.stack || error
