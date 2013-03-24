@@ -9,7 +9,7 @@ function httpPasta (opts) {
 
   function errorHandler (res) {
     var fired = false
-    return function (error, code) {
+    return function (error, code, cb) {
       if (!fired) {
         if (typeof error === 'number') {
           code = error
@@ -17,6 +17,7 @@ function httpPasta (opts) {
         }
         code = code || 500
         error = error || 'Unspecified error'
+        if (cb) res.on('close', cb)
         var stack = error.stack || error
         fired = true
         res.statusCode = (code || 500)
@@ -24,6 +25,7 @@ function httpPasta (opts) {
         log(code + ': ' + stack)
       } else {
         log("Already fired " + error)
+        if (cb) cb()
       }
     }
   }
